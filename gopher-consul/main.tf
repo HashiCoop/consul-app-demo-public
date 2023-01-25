@@ -29,8 +29,8 @@ data "tfe_outputs" "cluster" {
 }
 
 output "cluster" {
-    value = data.tfe_outputs.cluster.values
-    sensitive = true
+    value = nonsensitive(data.tfe_outputs.cluster.values)
+
 }
 
 # data "aws_eks_cluster" "cluster" {
