@@ -49,7 +49,7 @@ module "eks" {
   version = "18.26.6"
 
   cluster_name    = "${var.TFC_WORKSPACE_NAME}-v2"
-  cluster_version = "1.23"
+  cluster_version = "1.22"
 
   vpc_id     = data.tfe_outputs.vpc.values.vpc.vpc_id
   subnet_ids =  data.tfe_outputs.vpc.values.vpc.private_subnets
