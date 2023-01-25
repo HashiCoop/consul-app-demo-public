@@ -132,7 +132,3 @@ resource "aws_security_group" "node_group_one" {
     ]
   }
 }
-
-data "aws_eks_cluster_auth" "cluster" {
-  name = module.eks.cluster_id
-}
