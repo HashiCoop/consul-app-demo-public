@@ -63,7 +63,7 @@ provider "helm" {
 
 resource "helm_release" "consul" {
   name      = "consul"
-  namespace = kubernetes_namespace.consul.metadata.name
+  namespace = kubernetes_namespace.consul.metadata[0].name
 
   repository = "https://helm.releases.hashicorp.com"
   chart      = "consul"
