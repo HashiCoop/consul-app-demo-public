@@ -1,3 +1,19 @@
+terraform {
+  required_providers {
+    helm = {
+      source  = "hashicorp/helm"
+      version = "2.5.1"
+    }
+  }
+}
+
+provider "aws" {
+  region     = "us-east-1"
+  access_key = data.doormat_aws_credentials.creds.access_key
+  secret_key = data.doormat_aws_credentials.creds.secret_key
+  token      = data.doormat_aws_credentials.creds.token
+}
+
 data "tfe_outputs" "cluster" {
   organization = var.TFC_ORG
   workspace = var.TFC_CLUSTER_WORKSPACE
