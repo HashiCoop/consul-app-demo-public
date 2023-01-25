@@ -53,6 +53,10 @@ module "eks" {
 
   vpc_id     = data.tfe_outputs.vpc.values.vpc.vpc_id
   subnet_ids =  data.tfe_outputs.vpc.values.vpc.private_subnets
+  
+  node_security_group_tags = {
+    "kubernetes.io/cluster/${var.TFC_WORKSPACE_NAME}-v2" = null
+  }
 
   eks_managed_node_group_defaults = {
     ami_type = "AL2_x86_64"
@@ -62,7 +66,7 @@ module "eks" {
     # Disabling and using externally provided security groups
     create_security_group = false
   }
-
+  
   eks_managed_node_groups = {
     one = {
       name = "node-group-1"
@@ -77,15 +81,12 @@ module "eks" {
       echo 'foo bar'
       EOT
 
-      vpc_security_group_ids = [
-        aws_security_group.node_group_one.id
-      ]
     }
 
     two = {
       name = "node-group-2"
 
-      instance_types = ["t3.medium"]
+      instance_types = ["t3.small"]
 
       min_size     = 1
       max_size     = 2
@@ -95,9 +96,6 @@ module "eks" {
       echo 'foo bar'
       EOT
 
-      vpc_security_group_ids = [
-        aws_security_group.node_group_one.id
-      ]
     }
   }
 
