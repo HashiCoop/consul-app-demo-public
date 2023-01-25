@@ -29,7 +29,7 @@ data "tfe_outputs" "cluster" {
 }
 
 output "cluster" {
-    value = nonsensitive(data.tfe_outputs.cluster.values)
+    value = nonsensitive(data.tfe_outputs.cluster.values.cluster_id)
 
 }
 
