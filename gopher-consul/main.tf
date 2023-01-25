@@ -25,11 +25,11 @@ provider "aws" {
 
 data "tfe_outputs" "cluster" {
   organization = var.TFC_ORG
-  workspace = var.TFC_CLUSTER_WORKSPACE
+  workspace    = var.TFC_CLUSTER_WORKSPACE
 }
 
 output "cluster" {
-    value = nonsensitive(data.tfe_outputs.cluster.values.cluster_id)
+  value = nonsensitive(data.tfe_outputs.cluster.values.cluster_id)
 
 }
 
@@ -49,14 +49,15 @@ data "aws_eks_cluster_auth" "cluster" {
 
 provider "helm" {
   kubernetes {
-  host                   = data.aws_eks_cluster.cluster.endpoint
-  token                  = data.aws_eks_cluster_auth.cluster.token
-  cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
+    host                   = data.aws_eks_cluster.cluster.endpoint
+    token                  = data.aws_eks_cluster_auth.cluster.token
+    cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
   }
 }
 
 resource "helm_release" "consul" {
-  name       = "consul"
+  name      = "consul"
+  namespace = "consul"
 
   repository = "https://helm.releases.hashicorp.com"
   chart      = "consul"
