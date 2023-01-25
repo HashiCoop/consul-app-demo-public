@@ -1,5 +1,10 @@
+data "tfe_outputs" "cluster" {
+  organization = var.TFC_ORG
+  workspace = var.TFC_CLUSTER_WORKSPACE
+}
+
 data "aws_eks_cluster_auth" "cluster" {
-  name = data.tfe_outputs.eks_cluster.values.cluster_id
+  name = data.tfe_outputs.cluster.values.cluster_id
 }
 
 # provider "kubernetes" {

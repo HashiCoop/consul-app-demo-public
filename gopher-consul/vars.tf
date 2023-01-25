@@ -3,7 +3,7 @@ variable "TFC_ORG" {
     default = "hashicoop"
 }
 
-variable "CLUSTER_WORKSPACE" {
+variable "TFC_CLUSTER_WORKSPACE" {
     type = string
     default = "k8s"
 }
