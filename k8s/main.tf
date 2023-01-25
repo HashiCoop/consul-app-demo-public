@@ -81,6 +81,9 @@ module "eks" {
       echo 'foo bar'
       EOT
 
+#      vpc_security_group_ids = [
+#        aws_security_group.node_group_one.id
+#      ]
     }
 
     two = {
@@ -116,17 +119,32 @@ module "eks" {
   ]
 }
 
-resource "aws_security_group" "node_group_one" {
-  name_prefix = "node_group_one"
-  vpc_id      = data.tfe_outputs.vpc.values.vpc.vpc_id
+#resource "aws_security_group" "node_group_one" {
+#  name_prefix = "node_group_one"
+#  vpc_id      = data.tfe_outputs.vpc.values.vpc_id
+#
+#  ingress {
+#    from_port = 22
+#    to_port   = 22
+#    protocol  = "tcp"
+#
+#    cidr_blocks = [
+#      "10.0.0.0/8",
+#    ]
+#  }
+#}
 
-  ingress {
-    from_port = 22
-    to_port   = 22
-    protocol  = "tcp"
-
-    cidr_blocks = [
-      "10.0.0.0/8",
-    ]
-  }
-}
+#resource "aws_security_group" "node_group_two" {
+#  name_prefix = "node_group_two"
+#  vpc_id      = data.tfe_outputs.vpc.values.vpc_id
+#
+#  ingress {
+#    from_port = 22
+#    to_port   = 22
+#    protocol  = "tcp"
+#
+#    cidr_blocks = [
+#      "192.168.0.0/16",
+#    ]
+#  }
+#}
