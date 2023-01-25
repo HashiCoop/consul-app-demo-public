@@ -3,6 +3,10 @@ data "tfe_outputs" "cluster" {
   workspace = var.TFC_CLUSTER_WORKSPACE
 }
 
+data "aws_eks_cluster" "cluster" {
+  name = data.tfe_outputs.cluster.values.cluster_id
+}
+
 data "aws_eks_cluster_auth" "cluster" {
   name = data.tfe_outputs.cluster.values.cluster_id
 }
