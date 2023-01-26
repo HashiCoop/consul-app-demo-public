@@ -10,16 +10,16 @@ provider "consul" {
   token = data.kubernetes_secret.gcp_consul_bootstrap_acl_token.data
 }
 
-resource "consul_peering_token" "eu-us" {
+resource "consul_peering_token" "aws-gcp" {
   provider  = consul.aws
   peer_name = "gcp-cluster"
 }
 
-resource "consul_peering" "eu-us" {
+resource "consul_peering" "gcp-aws" {
   provider = consul.gcp
 
   peer_name     = "aws-cluster"
-  peering_token = consul_peering_token.token.peering_token
+  peering_token = consul_peering_token.aws-gcp.peering_token
 
   meta = {
     hello = "world"
