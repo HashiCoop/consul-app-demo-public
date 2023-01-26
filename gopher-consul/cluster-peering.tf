@@ -1,12 +1,12 @@
 provider "consul" {
   alias   = "aws"
-  address = data.kubernetes_service.consul_ui.status[0].load_balancer[0].ingress[0].hostname
+  address = "https://${data.kubernetes_service.consul_ui.status[0].load_balancer[0].ingress[0].hostname}:8200"
   token = data.kubernetes_secret.consul_bootstrap_acl_token.data.token
 }
 
 provider "consul" {
   alias   = "gcp"
-  address = data.kubernetes_service.gcp_consul_ui.status[0].load_balancer[0].ingress[0].ip
+  address = "https://${data.kubernetes_service.gcp_consul_ui.status[0].load_balancer[0].ingress[0].ip}:8200"
   token = data.kubernetes_secret.gcp_consul_bootstrap_acl_token.data.token
 }
 
