@@ -20,7 +20,6 @@ resource "consul_service" "vault" {
     check {
         check_id                          = "service:vault_api"
         name                              = "vault health"
-        status                            = "passing"
         http                              = "https://vault-cluster-public-vault-fcbc1a73.d087f7bf.z1.hashicorp.cloud:8200/v1/sys/health"
         tls_skip_verify                   = false
         interval                          = "10s"
