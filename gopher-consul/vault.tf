@@ -1,9 +1,13 @@
+resource "consul_node" "vault" {
+  name    = "vault"
+  address = "https://vault-cluster-public-vault-fcbc1a73.d087f7bf.z1.hashicorp.cloud"
+}
+
 resource "consul_service" "vault" {
     provider = consul.aws
 
     name = "vault"
-    node = "vault"
-    address = "https://vault-cluster-public-vault-fcbc1a73.d087f7bf.z1.hashicorp.cloud"
+    node = resource.consul_node.vault.name
     port = 8200
     meta = {
         external-node = "true"
