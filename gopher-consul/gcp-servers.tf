@@ -1,7 +1,5 @@
 provider "google" {
   project     = "cmelgreen-consul-mesh-test"
-  region      = "us-central1"
-  zone        = "us-central1-c"
 }
 
 data "google_client_config" "provider" {}
