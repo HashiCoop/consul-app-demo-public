@@ -16,6 +16,7 @@ provider "consul" {
 
 resource "kubernetes_manifest" "mesh_gateway" {
   manifest  = yamldecode(file("./config/mesh-gw.yaml"))
+
 }
 
 resource "kubernetes_manifest" "gcp_mesh_gateway" {
@@ -23,14 +24,14 @@ resource "kubernetes_manifest" "gcp_mesh_gateway" {
   manifest  = yamldecode(file("./config/mesh-gw.yaml"))
 }
 
-# resource "consul_peering_token" "aws-gcp" {
-#   provider  = consul.aws
-#   peer_name = "gcp-cluster"
+resource "consul_peering_token" "aws-gcp" {
+  provider  = consul.aws
+  peer_name = "gcp-cluster"
 
-#   depends_on = [
-#     kubernetes_manifest.gcp_mesh_gateway
-#   ]
-# }
+  depends_on = [
+    kubernetes_manifest.gcp_mesh_gateway
+  ]
+}
 
 # resource "consul_peering" "gcp-aws" {
 #   provider = consul.gcp
