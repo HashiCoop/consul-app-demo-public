@@ -80,7 +80,7 @@ data "kubernetes_secret" "consul_bootstrap_acl_token" {
   }
 }
 
-data "kubernetes_service" "load_balancer_endpoint" {
+data "kubernetes_service" "consul)ui" {
   metadata {
     name = "consul-ui"
     namespace = helm_release.consul.namespace
@@ -92,5 +92,5 @@ output "consul_bootstrap_acl_token" {
 } 
 
 output "consul_ui_endpoint" {
-  value = data.kubernetes_service.load_balancer_endpoint.spec[0].load_balancer_ip
+  value = data.kubernetes_service.consul_ui.load_balancer_ingress.0.ip
 }
