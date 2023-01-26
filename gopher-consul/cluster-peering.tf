@@ -14,18 +14,36 @@ provider "consul" {
   insecure_https = true
 }
 
-# resource "consul_peering_token" "aws-gcp" {
-#   provider  = consul.aws
-#   peer_name = "gcp-cluster"
-# }
+resource "kubernetes_manifest" "mesh_gateway" {
+    provider = consul.aws
+    manifest = yamldecode(file("./config/mesh-gw/yaml"))
+}
 
-# resource "consul_peering" "gcp-aws" {
-#   provider = consul.gcp
+resource "kubernetes_manifest" "gcp_mesh_gateway" {
+    provider = consul.gcp
+    manifest = yamldecode(file("./config/mesh-gw/yaml"))
+}
 
-#   peer_name     = "aws-cluster"
-#   peering_token = consul_peering_token.aws-gcp.peering_token
+resource "consul_peering_token" "aws-gcp" {
+  provider  = consul.aws
+  peer_name = "gcp-cluster"
 
-#   meta = {
-#     hello = "world"
-#   }
-# }
+  depends_on = [
+    kubernetes_manifest.gcp_mesh_gateway
+  ]
+}
+
+resource "consul_peering" "gcp-aws" {
+  provider = consul.gcp
+
+  peer_name     = "aws-cluster"
+  peering_token = consul_peering_token.aws-gcp.peering_token
+
+  meta = {
+    hello = "world"
+  }
+
+  depends_on = [
+    kubernetes_manifest.gcp_mesh_gateway
+  ]
+}
