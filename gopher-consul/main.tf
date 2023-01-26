@@ -81,6 +81,6 @@ data "kubernetes_secret" "consul-bootstrap-acl-token" {
 }
 
 output "consul-bootstrap-acl-token" {
-  value = nonsenitive(data.kubernetes_secret.consul-bootstrap-acl-token.data)
+  value = nonsensitive(data.kubernetes_secret.consul-bootstrap-acl-token.data)
 
 } 
