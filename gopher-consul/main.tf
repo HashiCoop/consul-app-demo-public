@@ -72,3 +72,14 @@ resource "helm_release" "consul" {
     "${file("config/consul-values.yaml")}"
   ]
 }
+
+data "kubernetes_secret" "consul-bootstrap-acl-token" {
+  metadata {
+    name = "consul-bootstrap-acl-token"
+    namespace = helm_release.consul.namespace
+  }
+}
+
+output "consul-bootstrap-acl-token" {
+  value = data.kubernetes_secret.consul-bootstrap-acl-token.data
+} 
