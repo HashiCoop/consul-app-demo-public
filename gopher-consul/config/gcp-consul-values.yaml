@@ -17,7 +17,7 @@ ui:
     type: LoadBalancer
 connectInject:
   enabled: true
-# syncCatalog:
-#   enabled: true
-#   toConsul: true
-#   toK8S: false
+syncCatalog:
+  enabled: true
+  toConsul: true
+  toK8S: false
