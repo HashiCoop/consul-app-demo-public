@@ -1,5 +1,5 @@
 provider "google" {
-  project     = "cmelgreen-consul-mesh-test"
+  project     = "hc-0a4bbbd93e1449aea8902b850d9"
 }
 
 data "google_client_config" "provider" {}
