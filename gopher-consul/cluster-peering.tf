@@ -14,18 +14,18 @@ provider "consul" {
   insecure_https = true
 }
 
-resource "consul_peering_token" "aws-gcp" {
-  provider  = consul.aws
-  peer_name = "gcp-cluster"
-}
+# resource "consul_peering_token" "aws-gcp" {
+#   provider  = consul.aws
+#   peer_name = "gcp-cluster"
+# }
 
-resource "consul_peering" "gcp-aws" {
-  provider = consul.gcp
+# resource "consul_peering" "gcp-aws" {
+#   provider = consul.gcp
 
-  peer_name     = "aws-cluster"
-  peering_token = consul_peering_token.aws-gcp.peering_token
+#   peer_name     = "aws-cluster"
+#   peering_token = consul_peering_token.aws-gcp.peering_token
 
-  meta = {
-    hello = "world"
-  }
-}
+#   meta = {
+#     hello = "world"
+#   }
+# }
