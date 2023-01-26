@@ -17,5 +17,7 @@ ui:
     type: LoadBalancer
 connectInject:
   enabled: true
-terminatingGateways:
+syncCatalog:
   enabled: true
+  toConsul: true
+  toK8S: false

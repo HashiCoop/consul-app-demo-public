@@ -69,7 +69,7 @@ resource "helm_release" "consul" {
   chart      = "consul"
 
   values = [
-    "${file("config/consul-values.yaml")}"
+    "${file("config/aws-consul-values.yaml")}"
   ]
 }
 

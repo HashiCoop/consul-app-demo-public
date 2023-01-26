@@ -45,7 +45,7 @@ resource "helm_release" "gcp_consul" {
   chart      = "consul"
 
   values = [
-    "${file("config/consul-values.yaml")}"
+    "${file("config/gcp-consul-values.yaml")}"
   ]
 }
 
