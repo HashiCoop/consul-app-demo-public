@@ -1,21 +1,21 @@
-# provider "google" {
-#   project     = "hc-0a4bbbd93e1449aea8902b850d9"
-# }
+provider "google" {
+  project     = "hc-0a4bbbd93e1449aea8902b850d9"
+}
 
-# data "google_client_config" "provider" {}
+data "google_client_config" "provider" {}
 
-# data "google_container_cluster" "cluster" {
-#   name     = "consul-autopilot"
-#   location = "us-central1-c"
-# }
+data "google_container_cluster" "cluster" {
+  name     = "consul-autopilot"
+  location = "us-central1-c"
+}
 
-# provider "kubernetes" {
-#   host  = "https://${data.google_container_cluster.cluster.endpoint}"
-#   token = data.google_client_config.provider.access_token
-#   cluster_ca_certificate = base64decode(data.google_container_cluster.cluster.master_auth[0].cluster_ca_certificate)
+provider "kubernetes" {
+  host  = "https://${data.google_container_cluster.cluster.endpoint}"
+  token = data.google_client_config.provider.access_token
+  cluster_ca_certificate = base64decode(data.google_container_cluster.cluster.master_auth[0].cluster_ca_certificate)
 
-#   alias = "gcp"
-# }
+  alias = "gcp"
+}
 
 # resource "kubernetes_namespace" "gcp_consul" {
 #   provider = kubernetes.gcp
