@@ -34,11 +34,11 @@ output "aws_cluster" {
 }
 
 data "aws_eks_cluster" "aws_cluster" {
-  name = data.tfe_outputs.cluster.values.cluster_id
+  name = data.tfe_outputs.aws_cluster.values.cluster_id
 }
 
 data "aws_eks_cluster_auth" "aws_cluster" {
-  name = data.tfe_outputs.cluster.values.cluster_id
+  name = data.tfe_outputs.aws_cluster.values.cluster_id
 }
 
 provider "kubernetes" {
@@ -59,9 +59,9 @@ resource "kubernetes_namespace" "aws_consul" {
 
 provider "helm" {
   kubernetes {
-    host                   = data.aws_eks_cluster.cluster.endpoint
-    token                  = data.aws_eks_cluster_auth.cluster.token
-    cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
+    host                   = data.aws_eks_cluster.aws_cluster.endpoint
+    token                  = data.aws_eks_cluster_auth.aws_cluster.token
+    cluster_ca_certificate = base64decode(data.aws_eks_cluster.aws_cluster.certificate_authority.0.data)
   }
 
   alias = "aws"
