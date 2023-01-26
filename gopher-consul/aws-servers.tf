@@ -92,5 +92,5 @@ output "consul_bootstrap_acl_token" {
 } 
 
 output "consul_ui_endpoint" {
-  value = data.kubernetes_service.consul_ui.status.0.load_balancer.0.ingress.0.hostname
+  value = data.kubernetes_service.consul_ui.status[0].load_balancer[0].ingress[0].hostname
 }
