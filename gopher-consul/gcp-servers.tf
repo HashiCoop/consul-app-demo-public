@@ -17,13 +17,13 @@ provider "kubernetes" {
   alias = "gcp"
 }
 
-# resource "kubernetes_namespace" "gcp_consul" {
-#   provider = kubernetes.gcp
+resource "kubernetes_namespace" "gcp_consul" {
+  provider = kubernetes.gcp
 
-#   metadata {
-#     name = "consul"
-#   }
-# }
+  metadata {
+    name = "consul"
+  }
+}
 
 provider "helm" {
   kubernetes {
@@ -35,42 +35,42 @@ provider "helm" {
   alias = "gcp"
 }
 
-# resource "helm_release" "gcp_consul" {
-#   provider = helm.gcp
+resource "helm_release" "gcp_consul" {
+  provider = helm.gcp
 
-#   name      = "consul"
-#   namespace = kubernetes_namespace.gcp_consul.metadata[0].name
+  name      = "consul"
+  namespace = kubernetes_namespace.gcp_consul.metadata[0].name
 
-#   repository = "https://helm.releases.hashicorp.com"
-#   chart      = "consul"
+  repository = "https://helm.releases.hashicorp.com"
+  chart      = "consul"
 
-#   values = [
-#     "${file("config/consul-values.yaml")}"
-#   ]
-# }
+  values = [
+    "${file("config/consul-values.yaml")}"
+  ]
+}
 
-# data "kubernetes_secret" "gcp_consul_bootstrap_acl_token" {
-#   provider = kubernetes.gcp
+data "kubernetes_secret" "gcp_consul_bootstrap_acl_token" {
+  provider = kubernetes.gcp
 
-#   metadata {
-#     name = "consul-bootstrap-acl-token"
-#     namespace = helm_release.gcp_consul.namespace
-#   }
-# }
+  metadata {
+    name = "consul-bootstrap-acl-token"
+    namespace = helm_release.gcp_consul.namespace
+  }
+}
 
-# data "kubernetes_service" "gcp_consul_ui" {
-#   provider = kubernetes.gcp
+data "kubernetes_service" "gcp_consul_ui" {
+  provider = kubernetes.gcp
 
-#   metadata {
-#     name = "consul-ui"
-#     namespace = helm_release.gcp_consul.namespace
-#   }
-# }
+  metadata {
+    name = "consul-ui"
+    namespace = helm_release.gcp_consul.namespace
+  }
+}
 
-# output "gcp_consul_bootstrap_acl_token" {
-#   value = nonsensitive(data.kubernetes_secret.gcp_consul_bootstrap_acl_token.data)
-# } 
+output "gcp_consul_bootstrap_acl_token" {
+  value = nonsensitive(data.kubernetes_secret.gcp_consul_bootstrap_acl_token.data)
+} 
 
-# output "gcp_consul_ui_endpoint" {
-#   value = data.kubernetes_service.gcp_consul_ui.status[0].load_balancer[0].ingress[0].hostname
-# }
+output "gcp_consul_ui_endpoint" {
+  value = data.kubernetes_service.gcp_consul_ui.status[0].load_balancer[0].ingress[0].hostname
+}
