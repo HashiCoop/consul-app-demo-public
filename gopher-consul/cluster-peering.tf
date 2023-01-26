@@ -1,6 +1,6 @@
 provider "consul" {
   alias          = "aws"
-  address        = "a9e78ecc71269441da66304cd477764d-1559337923.us-east-1.elb.amazonaws.com"
+  address        = "a9e78ecc71269441da66304cd477764d-1559337923.us-east-1.elb.amazonaws.com/ui"
   token          = data.kubernetes_secret.consul_bootstrap_acl_token.data.token
   scheme         = "https"
   insecure_https = true
