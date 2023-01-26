@@ -80,7 +80,7 @@ data "kubernetes_secret" "consul_bootstrap_acl_token" {
   }
 }
 
-data "kubernetes_service" "consul)ui" {
+data "kubernetes_service" "consul_ui" {
   metadata {
     name = "consul-ui"
     namespace = helm_release.consul.namespace
