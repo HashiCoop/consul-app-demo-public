@@ -58,6 +58,9 @@ resource "kubernetes_namespace" "aws_consul" {
 }
 
 provider "helm" {
+  providers = {
+    kubernetes = kubernetes.aws
+  }
   kubernetes {
     host                   = data.aws_eks_cluster.aws_cluster.endpoint
     token                  = data.aws_eks_cluster_auth.aws_cluster.token

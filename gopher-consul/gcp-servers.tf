@@ -26,6 +26,10 @@ resource "kubernetes_namespace" "gcp_consul" {
 }
 
 provider "helm" {
+  providers = {
+    kubernetes = kubernetes.gcp
+  }
+
   kubernetes {
     host  = "https://${data.google_container_cluster.gcp_cluster.endpoint}"
     token = data.google_client_config.provider.access_token
