@@ -23,31 +23,35 @@ provider "aws" {
   token      = data.doormat_aws_credentials.creds.token
 }
 
-data "tfe_outputs" "cluster" {
+data "tfe_outputs" "aws_cluster" {
   organization = var.TFC_ORG
   workspace    = var.TFC_CLUSTER_WORKSPACE
 }
 
-output "cluster" {
-  value = nonsensitive(data.tfe_outputs.cluster.values.cluster_id)
+output "aws_cluster" {
+  value = nonsensitive(data.tfe_outputs.aws_cluster.values.cluster_id)
 
 }
 
-data "aws_eks_cluster" "cluster" {
+data "aws_eks_cluster" "aws_cluster" {
   name = data.tfe_outputs.cluster.values.cluster_id
 }
 
-data "aws_eks_cluster_auth" "cluster" {
+data "aws_eks_cluster_auth" "aws_cluster" {
   name = data.tfe_outputs.cluster.values.cluster_id
 }
 
 provider "kubernetes" {
-  host                   = data.aws_eks_cluster.cluster.endpoint
-  token                  = data.aws_eks_cluster_auth.cluster.token
-  cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
+  host                   = data.aws_eks_cluster.aws_cluster.endpoint
+  token                  = data.aws_eks_cluster_auth.aws_cluster.token
+  cluster_ca_certificate = base64decode(data.aws_eks_cluster.aws_cluster.certificate_authority.0.data)
+
+  alias = "aws"
 }
 
-resource "kubernetes_namespace" "consul" {
+resource "kubernetes_namespace" "aws_consul" {
+  provider = kubernetes.aws
+
   metadata {
     name = "consul"
   }
@@ -59,11 +63,15 @@ provider "helm" {
     token                  = data.aws_eks_cluster_auth.cluster.token
     cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
   }
+
+  alias = "aws"
 }
 
-resource "helm_release" "consul" {
+resource "helm_release" "aws_consul" {
+  provider = helm.aws
+
   name      = "consul"
-  namespace = kubernetes_namespace.consul.metadata[0].name
+  namespace = kubernetes_namespace.aws_consul.metadata[0].name
 
   repository = "https://helm.releases.hashicorp.com"
   chart      = "consul"
@@ -73,24 +81,28 @@ resource "helm_release" "consul" {
   ]
 }
 
-data "kubernetes_secret" "consul_bootstrap_acl_token" {
+data "kubernetes_secret" "aws_consul_bootstrap_acl_token" {
+  provider = kubernetes.aws
+
   metadata {
     name = "consul-bootstrap-acl-token"
-    namespace = helm_release.consul.namespace
+    namespace = helm_release.aws_consul.namespace
   }
 }
 
-data "kubernetes_service" "consul_ui" {
+data "kubernetes_service" "aws_consul_ui" {
+  provider = kubernetes.aws
+
   metadata {
     name = "consul-ui"
-    namespace = helm_release.consul.namespace
+    namespace = helm_release.aws_consul.namespace
   }
 }
 
-output "consul_bootstrap_acl_token" {
-  value = nonsensitive(data.kubernetes_secret.consul_bootstrap_acl_token.data)
+output "aws_consul_bootstrap_acl_token" {
+  value = nonsensitive(data.kubernetes_secret.aws_consul_bootstrap_acl_token.data)
 } 
 
-output "consul_ui_endpoint" {
-  value = data.kubernetes_service.consul_ui.status[0].load_balancer[0].ingress[0].hostname
+output "aws_consul_ui_endpoint" {
+  value = data.kubernetes_service.aws_consul_ui.status[0].load_balancer[0].ingress[0].hostname
 }
