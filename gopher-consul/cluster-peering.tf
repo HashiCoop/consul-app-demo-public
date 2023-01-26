@@ -16,13 +16,11 @@ provider "consul" {
 
 resource "kubernetes_manifest" "mesh_gateway" {
   manifest  = yamldecode(file("./config/mesh-gw.yaml"))
-  namespace = "consul"
 }
 
 resource "kubernetes_manifest" "gcp_mesh_gateway" {
   provider  = kubernetes.gcp
   manifest  = yamldecode(file("./config/mesh-gw.yaml"))
-  namespace = "consul"
 }
 
 # resource "consul_peering_token" "aws-gcp" {
