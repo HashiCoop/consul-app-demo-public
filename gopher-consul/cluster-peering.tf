@@ -15,12 +15,11 @@ provider "consul" {
 }
 
 resource "kubernetes_manifest" "mesh_gateway" {
-    provider = consul.aws
     manifest = yamldecode(file("./config/mesh-gw/yaml"))
 }
 
 resource "kubernetes_manifest" "gcp_mesh_gateway" {
-    provider = consul.gcp
+    provider = kubernetes.gcp
     manifest = yamldecode(file("./config/mesh-gw/yaml"))
 }
 
