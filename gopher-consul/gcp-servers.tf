@@ -59,7 +59,7 @@ data "kubernetes_secret" "gcp_consul_bootstrap_acl_token" {
 }
 
 data "kubernetes_service" "gcp_consul_ui" {
-  provider = kubernets.gcp
+  provider = kubernetes.gcp
 
   metadata {
     name = "consul-ui"
