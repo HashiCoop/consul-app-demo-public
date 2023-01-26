@@ -73,14 +73,24 @@ resource "helm_release" "consul" {
   ]
 }
 
-data "kubernetes_secret" "consul-bootstrap-acl-token" {
+data "kubernetes_secret" "consul_bootstrap_acl_token" {
   metadata {
     name = "consul-bootstrap-acl-token"
     namespace = helm_release.consul.namespace
   }
 }
 
-output "consul-bootstrap-acl-token" {
-  value = nonsensitive(data.kubernetes_secret.consul-bootstrap-acl-token.data)
+data "kubernetes_service" "load_balancer_endpoint" {
+  metadata {
+    name = "consul-ui"
+    namespace = helm_release.consul.namespace
+  }
+}
 
+output "consul_bootstrap_acl_token" {
+  value = nonsensitive(data.kubernetes_secret.consul_bootstrap_acl_token.data)
 } 
+
+output "consul_ui_endpoint" {
+  value = data.kubernetes_service.load_balancer_endpoint.spec.load_balancer_ip
+}
