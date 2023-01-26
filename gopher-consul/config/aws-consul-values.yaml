@@ -23,3 +23,5 @@ syncCatalog:
   enabled: true
   toConsul: true
   toK8S: false
+  k8sAllowNamespaces: ['kube-system', 'kube-public']
+  k8sDenyNamespaces: ['kube-node-lease']

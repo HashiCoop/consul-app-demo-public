@@ -1,7 +1,7 @@
 global:
   enabled: true
   name: consul
-  datacenter: aws-us-east-1
+  datacenter: gcp-us-central1-c
   tls:
     enabled: true
   acls:

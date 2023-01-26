@@ -29,6 +29,10 @@ provider "consul" {
   insecure_https = true
 }
 
+output "gcp_consul_api_listed_endpoint" {
+    value = data.kubernetes_service.gcp_consul_ui.status[0].load_balancer[0].ingress[0].ip
+}
+
 # resource "kubernetes_manifest" "mesh_gateway" {
 #   manifest  = yamldecode(file("./config/mesh-gw.yaml"))
 
