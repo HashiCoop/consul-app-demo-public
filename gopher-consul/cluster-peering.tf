@@ -10,13 +10,18 @@ provider "consul" {
   insecure_https = true
 }
 
-provider "consul" {
-  alias          = "gcp"
-  address        = data.kubernetes_service.gcp_consul_ui.status[0].load_balancer[0].ingress[0].ip
-  token          = data.kubernetes_secret.gcp_consul_bootstrap_acl_token.data.token
-  scheme         = "https"
-  insecure_https = true
+resource "consul_peering_token" "aws-gcp" {
+  provider  = consul.aws
+  peer_name = "gcp-cluster"
 }
+
+# provider "consul" {
+#   alias          = "gcp"
+#   address        = data.kubernetes_service.gcp_consul_ui.status[0].load_balancer[0].ingress[0].ip
+#   token          = data.kubernetes_secret.gcp_consul_bootstrap_acl_token.data.token
+#   scheme         = "https"
+#   insecure_https = true
+# }
 
 # resource "kubernetes_manifest" "mesh_gateway" {
 #   manifest  = yamldecode(file("./config/mesh-gw.yaml"))
@@ -27,15 +32,6 @@ provider "consul" {
 #   provider  = kubernetes.gcp
 #   manifest  = yamldecode(file("./config/mesh-gw.yaml"))
 # }
-
-resource "consul_peering_token" "aws-gcp" {
-  provider  = consul.aws
-  peer_name = "gcp-cluster"
-
-#   depends_on = [
-#     kubernetes_manifest.gcp_mesh_gateway
-#   ]
-}
 
 # resource "consul_peering" "gcp-aws" {
 #   provider = consul.gcp
