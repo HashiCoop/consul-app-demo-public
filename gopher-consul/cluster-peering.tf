@@ -1,13 +1,15 @@
 provider "consul" {
-  alias   = "aws"
-  address = "https://${data.kubernetes_service.consul_ui.status[0].load_balancer[0].ingress[0].hostname}"
-  token = data.kubernetes_secret.consul_bootstrap_acl_token.data.token
+  alias          = "aws"
+  address        = "https://${data.kubernetes_service.consul_ui.status[0].load_balancer[0].ingress[0].hostname}"
+  token          = data.kubernetes_secret.consul_bootstrap_acl_token.data.token
+  insecure_https = true
 }
 
 provider "consul" {
-  alias   = "gcp"
-  address = "https://${data.kubernetes_service.gcp_consul_ui.status[0].load_balancer[0].ingress[0].ip}"
-  token = data.kubernetes_secret.gcp_consul_bootstrap_acl_token.data.token
+  alias          = "gcp"
+  address        = "https://${data.kubernetes_service.gcp_consul_ui.status[0].load_balancer[0].ingress[0].ip}"
+  token          = data.kubernetes_secret.gcp_consul_bootstrap_acl_token.data.token
+  insecure_https = true
 }
 
 resource "consul_peering_token" "aws-gcp" {
