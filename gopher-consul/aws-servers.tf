@@ -92,5 +92,5 @@ output "consul_bootstrap_acl_token" {
 } 
 
 output "consul_ui_endpoint" {
-  value = data.kubernetes_service.load_balancer_endpoint.spec.load_balancer_ip
+  value = data.kubernetes_service.load_balancer_endpoint.spec[0].load_balancer_ip
 }
