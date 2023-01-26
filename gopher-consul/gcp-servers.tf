@@ -72,5 +72,5 @@ output "gcp_consul_bootstrap_acl_token" {
 } 
 
 output "gcp_consul_ui_endpoint" {
-  value = data.kubernetes_service.gcp_consul_ui.load_balancer_ip
+  value = data.kubernetes_service.gcp_consul_ui
 }
