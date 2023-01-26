@@ -1,4 +1,5 @@
 resource "consul_node" "vault" {
+    provider = consul.aws
   name    = "vault"
   address = "https://vault-cluster-public-vault-fcbc1a73.d087f7bf.z1.hashicorp.cloud"
 }
