@@ -35,6 +35,8 @@ resource "consul_service" "vault" {
 # }
 
 resource "consul_acl_policy" "vault_write" {
+    provider = consul.aws
+
   name        = "vault_write"
   rules       = <<-RULE
     service "vault" {
@@ -44,6 +46,8 @@ resource "consul_acl_policy" "vault_write" {
 }
 
 resource "consul_acl_role" "read" {
+        provider = consul.aws
+        
     name = "consul-terminating-gateway-acl-role"
 
     policies = [
