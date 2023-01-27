@@ -28,6 +28,6 @@ resource "kubernetes_service_account" "example" {
 
 resource "kubernetes_manifest" "orgchart" {
     provider = kubernetes.gcp
-  manifest = yamldecode(file("./config/deployment-orgchart.yaml"))
+  manifest = yamldecode(file("./config/devwebapp.yaml"))
 }
 
