@@ -1,0 +1,9 @@
+apiVersion: consul.hashicorp.com/v1alpha1
+kind: ExportedServices
+metadata:
+  name: default
+spec:
+  services:
+    - name: vault ## The name of the service you want to export
+      consumers:
+      - peer: gcp-cluster ## The name of the peer that receives the service

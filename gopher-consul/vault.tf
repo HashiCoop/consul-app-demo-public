@@ -38,6 +38,10 @@ resource "kubernetes_manifest" "service_defaults" {
   manifest = yamldecode(file("./config/service-defaults.yaml"))
 }
 
+resource "kubernetes_manifest" "service_defaults" {
+  manifest = yamldecode(file("./config/export_vault.yaml"))
+}
+
 # data "consul_acl_role" "term-gw" {
 #   name = "consul-terminating-gateway-acl-role"
 # }
