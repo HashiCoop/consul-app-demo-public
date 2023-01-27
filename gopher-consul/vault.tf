@@ -40,14 +40,14 @@ resource "consul_acl_policy" "vault_write" {
   name        = "vault_write"
   rules       = <<-RULE
     service "vault" {
-      policy = "read, write"
+      policy = "write"
     }
     RULE
 }
 
 resource "consul_acl_role" "read" {
         provider = consul.aws
-        
+
     name = "consul-terminating-gateway-acl-role"
 
     policies = [
