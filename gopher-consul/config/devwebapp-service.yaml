@@ -1,3 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: devwebapp
+spec:
+  selector:
+    app: devwebapp
+  # ports:
+  #   - port: 9091
+  #     targetPort: 9091
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
