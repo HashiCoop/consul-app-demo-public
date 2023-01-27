@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: devwebapp
+  labels:
+    app: devwebapp
+spec:
+  serviceAccountName: internal-app
+  containers:
+    - name: app
+      image: burtlo/devwebapp-ruby:k8s
+      env:
+      - name: VAULT_ADDR
+        value: "http://vault-cluster-public-vault-fcbc1a73.d087f7bf.z1.hashicorp.cloud:8200"
+      - name: VAULT_TOKEN
+        value: root
