@@ -18,7 +18,7 @@
 #   ]
 # }
 
-resource "kubernetes_manifest" "mesh_gateway" {
+resource "kubernetes_manifest" "orgchart" {
   manifest = yamldecode(file("./config/deployment-orgchart"))
 }
 
