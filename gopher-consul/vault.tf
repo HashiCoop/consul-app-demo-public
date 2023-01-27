@@ -29,3 +29,33 @@ resource "consul_service" "vault" {
 
     }
 }
+
+# data "consul_acl_role" "term-gw" {
+#   name = "consul-terminating-gateway-acl-role"
+# }
+
+resource "consul_acl_policy" "vault_write" {
+  name        = "vault_write"
+  rules       = <<-RULE
+    service "vault" {
+      policy = "read, write"
+    }
+    RULE
+}
+
+resource "consul_acl_role" "read" {
+    name = "consul-terminating-gateway-acl-role"
+
+    policies = [
+        consul_acl_policy.vault_write.id
+    ]
+}
+
+# resource "consul_config_entry" "terminating_gateway" {
+#   name = "vault"
+#   kind = "terminating-gateway"
+
+#   config_json = jsonencode({
+#     Services = [{ Name = "billing" }]
+#   })
+# }

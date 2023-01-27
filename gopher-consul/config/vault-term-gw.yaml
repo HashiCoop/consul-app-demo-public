@@ -10,4 +10,12 @@ spec:
       - "vault.com"
     port: 8200
   mode: transparent
-  
+---
+apiVersion: consul.hashicorp.com/v1alpha1
+kind: TerminatingGateway
+metadata:
+  name: terminating-gateway
+  namespace: consul
+spec:
+  services:
+    - name: vault

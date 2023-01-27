@@ -29,11 +29,13 @@ output "gcp_consul_api_listed_endpoint" {
   value = data.kubernetes_service.gcp_consul_ui.status[0].load_balancer[0].ingress[0].ip
 }
 
+### rewrite to consul resource
 resource "kubernetes_manifest" "mesh_gateway" {
   manifest = yamldecode(file("./config/mesh-gw.yaml"))
 
 }
 
+### rewrite to consul resource
 resource "kubernetes_manifest" "gcp_mesh_gateway" {
   provider = kubernetes.gcp
   manifest = yamldecode(file("./config/mesh-gw.yaml"))
