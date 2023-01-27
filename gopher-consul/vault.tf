@@ -38,7 +38,7 @@ resource "kubernetes_manifest" "service_defaults" {
   manifest = yamldecode(file("./config/service-defaults.yaml"))
 }
 
-resource "kubernetes_manifest" "service_defaults" {
+resource "kubernetes_manifest" "export_vault" {
   manifest = yamldecode(file("./config/export_vault.yaml"))
 }
 
