@@ -1,9 +1,9 @@
-# resource "kubernetes_namespace" "gcp_vault" {
-#     provider = kubernetes.gcp
-#   metadata {
-#     name = "vault"
-#   }
-# }
+resource "kubernetes_namespace" "gcp_vault" {
+    provider = kubernetes.gcp
+  metadata {
+    name = "orgchart"
+  }
+}
 
 # resource "helm_release" "orgchart" {
 #   provider  = helm.gcp
@@ -19,6 +19,7 @@
 # }
 
 resource "kubernetes_manifest" "orgchart" {
+    provider = kubernetes.gcp
   manifest = yamldecode(file("./config/deployment-orgchart.yaml"))
 }
 
