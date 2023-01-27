@@ -8,33 +8,3 @@ spec:
   # ports:
   #   - port: 9091
   #     targetPort: 9091
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: devwebapp
-  namespace: consul
-  labels:
-    app: devwebapp
-spec:
-  selector:
-    matchLabels:
-      app: devwebapp
-  replicas: 1
-  template:
-    metadata:
-      annotations:
-        'consul.hashicorp.com/connect-inject': 'true'
-
-      labels:
-        app: devwebapp
-    spec:
-      serviceAccountName: internal-app
-      containers:
-        - name: devwebapp
-          image: burtlo/devwebapp-ruby:k8s
-          env:
-          - name: VAULT_ADDR
-            value: "https://vault-cluster-public-vault-fcbc1a73.d087f7bf.z1.hashicorp.cloud"
-          - name: VAULT_TOKEN
-            value: root
