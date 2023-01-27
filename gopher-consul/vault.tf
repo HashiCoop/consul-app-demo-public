@@ -30,30 +30,42 @@ resource "consul_service" "vault" {
     }
 }
 
+resource "kubernetes_manifest" "gcp_mesh_gateway" {
+  provider = kubernetes.gcp
+  manifest = yamldecode(file("./config/vault-term-gw.yaml"))
+}
+
 # data "consul_acl_role" "term-gw" {
 #   name = "consul-terminating-gateway-acl-role"
 # }
 
-resource "consul_acl_policy" "vault_write" {
-    provider = consul.aws
+# resource "consul_acl_policy" "vault_write" {
+#     provider = consul.aws
 
-  name        = "vault_write"
-  rules       = <<-RULE
-    service "vault" {
-      policy = "write"
-    }
-    RULE
-}
+#   name        = "vault_write"
+#   rules       = <<-RULE
+#     service "vault" {
+#       policy = "write"
+#     }
+#     RULE
+# }
 
-resource "consul_acl_role" "read" {
-        provider = consul.aws
+# resource "consul_acl_token_policy_attachment" "attachment" {
+#     token_id = "7d8ef1e3-9789-4dd0-fdee-aa4cd12c723e"
+#     policy   = consul_acl_policy.vault_write.name
+# }
 
-    name = "consul-terminating-gateway-acl-role"
+# 7d8ef1e3-9789-4dd0-fdee-aa4cd12c723e
 
-    policies = [
-        consul_acl_policy.vault_write.id
-    ]
-}
+# resource "consul_acl_role" "read" {
+#         provider = consul.aws
+
+#     name = "consul-terminating-gateway-acl-role"
+
+#     policies = [
+#         consul_acl_policy.vault_write.id
+#     ]
+# }
 
 # resource "consul_config_entry" "terminating_gateway" {
 #   name = "vault"
