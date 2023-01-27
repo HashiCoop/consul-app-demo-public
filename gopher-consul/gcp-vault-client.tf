@@ -19,6 +19,6 @@
 # }
 
 resource "kubernetes_manifest" "orgchart" {
-  manifest = yamldecode(file("./config/deployment-orgchart"))
+  manifest = yamldecode(file("./config/deployment-orgchart.yaml"))
 }
 
