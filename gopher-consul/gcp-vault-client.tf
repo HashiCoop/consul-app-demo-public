@@ -31,8 +31,14 @@ resource "kubernetes_manifest" "orgchart" {
   manifest = yamldecode(file("./config/devwebapp-service.yaml"))
 }
 
-resource "kubernetes_manifest" "orgchart-service" {
+# resource "kubernetes_manifest" "orgchart-service" {
+#     provider = kubernetes.gcp
+#   manifest = yamldecode(file("./config/devwebapp.yaml"))
+# }
+
+resource "kubernetes_manifest" "orgchart-deployment" {
     provider = kubernetes.gcp
   manifest = yamldecode(file("./config/devwebapp.yaml"))
 }
+
 
