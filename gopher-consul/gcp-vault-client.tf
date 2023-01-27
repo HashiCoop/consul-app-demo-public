@@ -19,6 +19,7 @@ resource "kubernetes_namespace" "gcp_vault" {
 # }
 
 resource "kubernetes_service_account" "example" {
+    provider = kubernetes.gcp
   metadata {
     name = "internal-app"
   }
