@@ -10,12 +10,3 @@ spec:
       - "vault-cluster-public-vault-fcbc1a73.d087f7bf.z1.hashicorp.cloud"
     port: 8200
   mode: transparent
----
-apiVersion: consul.hashicorp.com/v1alpha1
-kind: TerminatingGateway
-metadata:
-  name: terminating-gateway
-  namespace: consul
-spec:
-  services:
-    - name: vault

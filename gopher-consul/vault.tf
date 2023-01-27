@@ -31,8 +31,13 @@ resource "consul_service" "vault" {
 }
 
 resource "kubernetes_manifest" "vault_term_gateway" {
-  provider = kubernetes.gcp
-  manifest = yamldecode(file("./config/vault-term-gw.yaml"))
+  provider = kubernetes.aws
+  manifest = yamldecode(file("./config/term-gw.yaml"))
+}
+
+resource "kubernetes_manifest" "vault_term_gateway" {
+  provider = kubernetes.aws
+  manifest = yamldecode(file("./config/service-defaults.yaml"))
 }
 
 # data "consul_acl_role" "term-gw" {
