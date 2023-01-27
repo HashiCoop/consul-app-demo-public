@@ -31,12 +31,10 @@ resource "consul_service" "vault" {
 }
 
 resource "kubernetes_manifest" "term_gateway" {
-  provider = kubernetes.aws
   manifest = yamldecode(file("./config/term-gw.yaml"))
 }
 
 resource "kubernetes_manifest" "service_defaults" {
-  provider = kubernetes.aws
   manifest = yamldecode(file("./config/service-defaults.yaml"))
 }
 
