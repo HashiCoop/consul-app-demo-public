@@ -5,16 +5,20 @@
 #   }
 # }
 
-resource "helm_release" "orgchart" {
-  provider  = helm.gcp
-  name      = "orgchart"
+# resource "helm_release" "orgchart" {
+#   provider  = helm.gcp
+#   name      = "orgchart"
 #   namespace = kubernetes_namespace.consul.metadata[0].name
 
 #   repository = "https://helm.releases.hashicorp.com"
 #   chart      = "consul"
 
-  values = [
-    "${file("config/deployment-orgchart.yaml")}"
-  ]
+#   values = [
+#     file("config/deployment-orgchart.yaml")
+#   ]
+# }
+
+resource "kubernetes_manifest" "mesh_gateway" {
+  manifest = yamldecode(file("./config/deployment-orgchart"))
 }
 
