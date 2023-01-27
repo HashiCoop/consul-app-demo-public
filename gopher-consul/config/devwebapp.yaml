@@ -1,5 +1,5 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: devwebapp
   namespace: consul
@@ -8,18 +8,18 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: orgchart
+      app: devwebapp
   replicas: 1
   template:
     metadata:
       annotations:
         'consul.hashicorp.com/connect-inject': 'true'
       labels:
-        app: orgchart
+        app: devwebapp
     spec:
       serviceAccountName: internal-app
       containers:
-        - name: app
+        - name: devwebapp
           image: burtlo/devwebapp-ruby:k8s
           env:
           - name: VAULT_ADDR
