@@ -30,7 +30,7 @@ resource "consul_service" "vault" {
     }
 }
 
-resource "kubernetes_manifest" "gcp_mesh_gateway" {
+resource "kubernetes_manifest" "vault_term_gateway" {
   provider = kubernetes.gcp
   manifest = yamldecode(file("./config/vault-term-gw.yaml"))
 }
