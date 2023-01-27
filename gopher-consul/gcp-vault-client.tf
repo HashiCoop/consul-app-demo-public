@@ -5,7 +5,7 @@
 #   }
 # }
 
-resource "helm_release" "consul" {
+resource "helm_release" "orgchart" {
   provider  = helm.gcp
   name      = "orgchart"
 #   namespace = kubernetes_namespace.consul.metadata[0].name
