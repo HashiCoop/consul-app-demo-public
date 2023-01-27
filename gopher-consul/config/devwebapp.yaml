@@ -14,7 +14,6 @@ spec:
     metadata:
       annotations:
         'consul.hashicorp.com/connect-inject': 'true'
-
       labels:
         app: devwebapp
     spec:

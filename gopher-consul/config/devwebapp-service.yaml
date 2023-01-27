@@ -6,6 +6,6 @@ metadata:
 spec:
   selector:
     app: devwebapp
-  # ports:
-  #   - port: 9091
-  #     targetPort: 9091
+  ports:
+    - port: 9091
+      targetPort: 9091
