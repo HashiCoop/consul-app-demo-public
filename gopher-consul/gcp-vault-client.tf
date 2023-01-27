@@ -18,6 +18,12 @@ resource "kubernetes_namespace" "gcp_vault" {
 #   ]
 # }
 
+resource "kubernetes_service_account" "example" {
+  metadata {
+    name = "internal-app"
+  }
+}
+
 resource "kubernetes_manifest" "orgchart" {
     provider = kubernetes.gcp
   manifest = yamldecode(file("./config/deployment-orgchart.yaml"))
