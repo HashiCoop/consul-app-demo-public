@@ -25,8 +25,8 @@ resource "kubernetes_service_account" "example" {
   }
 }
 
-# resource "kubernetes_manifest" "orgchart" {
-#     provider = kubernetes.gcp
-#   manifest = yamldecode(file("./config/deployment-orgchart.yaml"))
-# }
+resource "kubernetes_manifest" "orgchart" {
+    provider = kubernetes.gcp
+  manifest = yamldecode(file("./config/deployment-orgchart.yaml"))
+}
 
