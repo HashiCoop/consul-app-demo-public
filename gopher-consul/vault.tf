@@ -21,9 +21,10 @@ resource "consul_service" "vault" {
         check_id                          = "service:vault_api"
         name                              = "vault health"
         http                              = "https://vault-cluster-public-vault-fcbc1a73.d087f7bf.z1.hashicorp.cloud:8200/v1/sys/health"
-        tls_skip_verify                   = false
+        tls_skip_verify                   = true
         interval                          = "10s"
         timeout                           = "5s"
         deregister_critical_service_after = "30s"
+
     }
 }
