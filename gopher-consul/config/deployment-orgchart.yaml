@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: orgchart
-  namespace: orgchart
+  namespace: vault
   labels:
     app: orgchart
 spec:
@@ -13,6 +13,7 @@ spec:
   template:
     metadata:
       annotations:
+        'consul.hashicorp.com/connect-inject': 'true'
       labels:
         app: orgchart
     spec:

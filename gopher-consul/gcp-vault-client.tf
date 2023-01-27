@@ -1,28 +1,28 @@
-resource "kubernetes_namespace" "gcp_vault" {
-    provider = kubernetes.gcp
-  metadata {
-    name = "orgchart"
-  }
-}
-
-# resource "helm_release" "orgchart" {
-#   provider  = helm.gcp
-#   name      = "orgchart"
-#   namespace = kubernetes_namespace.consul.metadata[0].name
-
-#   repository = "https://helm.releases.hashicorp.com"
-#   chart      = "consul"
-
-#   values = [
-#     file("config/deployment-orgchart.yaml")
-#   ]
+# resource "kubernetes_namespace" "gcp_vault" {
+#     provider = kubernetes.gcp
+#   metadata {
+#     name = "orgchart"
+#   }
 # }
+
+resource "helm_release" "vault" {
+  provider  = helm.gcp
+  name      = "vault"
+  namespace = "consul"
+
+  repository = "https://helm.releases.hashicorp.com"
+  chart      = "vault"
+
+  values = [
+    file("config/deployment-orgchart.yaml")
+  ]
+}
 
 resource "kubernetes_service_account" "example" {
     provider = kubernetes.gcp
   metadata {
     name = "internal-app"
-    namespace = "orgchart"
+    namespace = "consul"
   }
 }
 
