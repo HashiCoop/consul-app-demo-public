@@ -1,3 +1,8 @@
+variable "CONSUL_NAME" {
+    type = string
+    default = "consul"
+}
+
 variable "CONSUL_VALUES" {
     type = lsit(string)
 }

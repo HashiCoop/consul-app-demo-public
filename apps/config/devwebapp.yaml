@@ -18,7 +18,7 @@ spec:
       labels:
         app: devwebapp
     spec:
-      serviceAccountName: internal-app
+      serviceAccountName: devwebapp
       containers:
         - name: devwebapp
           image: burtlo/devwebapp-ruby:k8s
