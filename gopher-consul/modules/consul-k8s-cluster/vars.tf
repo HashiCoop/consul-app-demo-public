@@ -12,7 +12,7 @@ variable "CONSUL_NAMESPACE" {
     default = "consul"
 }
 
-variable "K8S_AUTH" {
+variable "KUBERNETES_AUTH" {
     type = object({
         host = string
         token = string
