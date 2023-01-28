@@ -22,8 +22,6 @@ resource "consul_config_entry" "aws_mesh_gateway" {
   name      = "mesh"
   kind      = "mesh"
   partition = "default"
-  namespace = "consul"
-
   config_json = jsonencode({
       PeerThroughMeshGateways = true
   })
@@ -35,8 +33,6 @@ resource "consul_config_entry" "gcp_mesh_gateway" {
   name      = "mesh"
   kind      = "mesh"
   partition = "default"
-  namespace = "consul"
-
   config_json = jsonencode({
       PeerThroughMeshGateways = true
   })
@@ -44,8 +40,12 @@ resource "consul_config_entry" "gcp_mesh_gateway" {
 
 resource "consul_peering_token" "aws_gcp" {
   provider  = consul.aws
-  peer_name = "gcp-us-central1-c"
 
+  peer_name = "gcp-us-central1-c"
+  
+  depends_on = [
+        consul_config_entry.aws_mesh_gateway
+  ]
 
 }
 
