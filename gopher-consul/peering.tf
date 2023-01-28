@@ -56,6 +56,6 @@ resource "consul_peering" "aws_gcp" {
   peering_token = consul_peering_token.aws_gcp.peering_token
 
   depends_on = [
-    gcp_mesh_gatewayconsul_config_entry
+    consul_config_entry.gcp_mesh_gateway
   ]
 }
