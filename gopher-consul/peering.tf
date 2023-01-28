@@ -1,27 +1,27 @@
-# provider "consul" {
-#   alias = "aws"
+provider "consul" {
+  alias = "aws"
 
-#   address        = module.aws_consul.consul_ui_endpoint.hostname
-#   token          = module.aws_consul.consul_bootstrap_acl_token
-#   scheme         = "https"
-#   insecure_https = true
-# }
+  address        = module.aws_consul.consul_ui_endpoint.hostname
+  token          = module.aws_consul.consul_bootstrap_acl_token
+  scheme         = "https"
+  insecure_https = true
+}
 
-# provider "consul" {
-#   alias   = "gcp"
+provider "consul" {
+  alias   = "gcp"
 
-#   address        = module.aws_consul.consul_ui_endpoint.hostname
-#   token          = module.aws_consul.consul_bootstrap_acl_token
-#   scheme         = "https"
-#   insecure_https = true
-# }
+  address        = module.aws_consul.consul_ui_endpoint.hostname
+  token          = module.aws_consul.consul_bootstrap_acl_token
+  scheme         = "https"
+  insecure_https = true
+}
 
 # resource "consul_config_entry" "aws_mesh_gateway" {
 #   provider = consul.aws
 
 #   name      = "mesh"
 #   kind      = "mesh"
-#   partition = "default"
+
 #   config_json = jsonencode({
 #       PeerThroughMeshGateways = true
 #   })
@@ -32,7 +32,7 @@
 
 #   name      = "mesh"
 #   kind      = "mesh"
-#   partition = "default"
+
 #   config_json = jsonencode({
 #       PeerThroughMeshGateways = true
 #   })
