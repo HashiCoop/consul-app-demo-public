@@ -8,7 +8,7 @@ data "google_container_cluster" "cluster" {
 module "gcp_consul" {
   source = "./modules/consul-k8s-cluster"
 
-  CONSUL_VALUES = ["config/gcp-consul-values.yaml"]
+  CONSUL_VALUES = [file("config/gcp-consul-values.yaml")]
   
   KUBERNETES_AUTH = {
     host  = "https://${data.google_container_cluster.cluster.endpoint}"

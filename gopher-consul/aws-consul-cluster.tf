@@ -14,7 +14,7 @@ data "aws_eks_cluster_auth" "cluster" {
 module "aws_consul" {
   source = "./modules/consul-k8s-cluster"
 
-  CONSUL_VALUES = ["config/aws-consul-values.yaml"]
+  CONSUL_VALUES = [file("config/aws-consul-values.yaml")]
   
   KUBERNETES_AUTH = {
     host                   = data.aws_eks_cluster.cluster.endpoint
