@@ -4,7 +4,7 @@ variable "CONSUL_NAME" {
 }
 
 variable "CONSUL_VALUES" {
-    type = lsit(string)
+    type = list(string)
 }
 
 variable "CONSUL_NAMESPACE" {
