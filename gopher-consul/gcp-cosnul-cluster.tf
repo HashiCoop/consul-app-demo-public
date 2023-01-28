@@ -17,10 +17,10 @@ module "gcp_consul" {
   }
 }
 
-output "aws_consul_bootstrap_acl_token" {
+output "gcp_consul_bootstrap_acl_token" {
   value = nonsensitive(module.gcp_consul.consul_bootstrap_acl_token)
 } 
 
-output "aws_consul_ui_endpoint" {
+output "gcp_consul_ui_endpoint" {
   value = module.gcp_consul.consul_ui_endpoint.hostname
 }
