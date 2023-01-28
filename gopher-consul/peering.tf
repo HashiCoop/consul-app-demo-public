@@ -16,46 +16,46 @@ provider "consul" {
   insecure_https = true
 }
 
-# resource "consul_config_entry" "aws_mesh_gateway" {
-#   provider = consul.aws
+resource "consul_config_entry" "aws_mesh_gateway" {
+  provider = consul.aws
 
-#   name      = "mesh"
-#   kind      = "mesh"
+  name      = "mesh"
+  kind      = "mesh"
 
-#   config_json = jsonencode({
-#       PeerThroughMeshGateways = true
-#   })
-# }
+  config_json = jsonencode({
+      PeerThroughMeshGateways = true
+  })
+}
 
-# resource "consul_config_entry" "gcp_mesh_gateway" {
-#   provider = consul.gcp
+resource "consul_config_entry" "gcp_mesh_gateway" {
+  provider = consul.gcp
 
-#   name      = "mesh"
-#   kind      = "mesh"
+  name      = "mesh"
+  kind      = "mesh"
 
-#   config_json = jsonencode({
-#       PeerThroughMeshGateways = true
-#   })
-# }
+  config_json = jsonencode({
+      PeerThroughMeshGateways = true
+  })
+}
 
-# resource "consul_peering_token" "aws_gcp" {
-#   provider  = consul.aws
+resource "consul_peering_token" "aws_gcp" {
+  provider  = consul.aws
 
-#   peer_name = "gcp-us-central1-c"
+  peer_name = "gcp-us-central1-c"
 
-#   depends_on = [
-#         consul_config_entry.aws_mesh_gateway
-#   ]
+  depends_on = [
+        consul_config_entry.aws_mesh_gateway
+  ]
 
-# }
+}
 
-# resource "consul_peering" "aws_gcp" {
-#   provider = consul.gcp
+resource "consul_peering" "aws_gcp" {
+  provider = consul.gcp
 
-#   peer_name     = "aws-us-east-1"
-#   peering_token = consul_peering_token.aws_gcp.peering_token
+  peer_name     = "aws-us-east-1"
+  peering_token = consul_peering_token.aws_gcp.peering_token
 
-#   depends_on = [
-#     consul_config_entry.gcp_mesh_gateway
-#   ]
-# }
+  depends_on = [
+    consul_config_entry.gcp_mesh_gateway
+  ]
+}
