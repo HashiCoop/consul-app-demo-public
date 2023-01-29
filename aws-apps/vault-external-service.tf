@@ -49,7 +49,7 @@ resource "consul_config_entry" "service_defaults" {
 }
 
 resource "consul_config_entry" "exported_services" {
-  name = consul_service.vault.name
+  name = "default" # required value
   kind = "exported-services"
 
   config_json = jsonencode({
