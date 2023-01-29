@@ -1,5 +1,4 @@
 resource "consul_node" "vault" {
-  provider = consul.aws
   name     = var.VAULT_NAME
   address  = var.VAULT_EXTERNAL_ADDRESS
 }
