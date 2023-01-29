@@ -1,6 +1,6 @@
 resource "consul_node" "vault" {
-  name     = var.VAULT_NAME
-  address  = var.VAULT_EXTERNAL_ADDRESS
+  name    = var.VAULT_NAME
+  address = var.VAULT_EXTERNAL_ADDRESS
 }
 
 resource "consul_service" "vault" {
@@ -43,7 +43,7 @@ resource "consul_config_entry" "service_defaults" {
     Protocol = "http"
     Destination = {
       Addresses = [resource.consul_node.vault.address]
-      Port = consul_service.vault.port
+      Port      = consul_service.vault.port
     }
   })
 }
@@ -54,8 +54,8 @@ resource "consul_config_entry" "exported_services" {
 
   config_json = jsonencode({
     Services = [{
-        Name = consul_service.vault.name
-        Consumers = [{ Peer = var.VAULT_UPSTREAM_DC }]
+      Name      = consul_service.vault.name
+      Consumers = [{ Peer = var.VAULT_UPSTREAM_DC }]
     }]
   })
 }
