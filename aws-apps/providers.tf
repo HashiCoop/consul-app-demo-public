@@ -5,7 +5,7 @@ data "tfe_outputs" "consul" {
 
 provider "consul" {
   address        = data.tfe_outputs.consul.values.aws_consul_auth.address
-  token          = data.tfe_outputs.consul.values.aws_consul_auth.address
+  token          = data.tfe_outputs.consul.values.aws_consul_auth.token
   scheme         = "https"
   insecure_https = true
 }
