@@ -10,8 +10,8 @@ provider "consul" {
 provider "consul" {
   alias   = "gcp"
 
-  address        = module.aws_consul.consul_ui_endpoint.hostname
-  token          = module.aws_consul.consul_bootstrap_acl_token
+  address        = module.gcp_consul.consul_ui_endpoint.hostname
+  token          = module.gcp_consul.consul_bootstrap_acl_token
   scheme         = "https"
   insecure_https = true
 }
