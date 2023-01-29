@@ -23,14 +23,9 @@ module "aws_consul" {
   }
 }
 
-output "aws_consul_ui_endpoint" {
-  value = data.aws_eks_cluster.cluster.endpoint
+output "aws_consul_auth" {
+  value = {
+    address        = module.aws_consul.consul_ui_endpoint.hostname
+    token          = module.aws_consul.consul_bootstrap_acl_token
+  }
 }
-
-# output "aws_consul_bootstrap_acl_token" {
-#   value = nonsensitive(module.aws_consul.consul_bootstrap_acl_token)
-# } 
-
-# output "aws_consul_ui_endpoint" {
-#   value = module.aws_consul.consul_ui_endpoint.hostname
-# }
