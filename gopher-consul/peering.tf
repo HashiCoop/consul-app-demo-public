@@ -43,6 +43,9 @@ resource "consul_config_entry" "gcp_mesh_gateway" {
     Peering = {
       PeerThroughMeshGateways = true
     }
+    TransparentProxy {
+      MeshDestinationsOnly = true
+    }
   })
 }
 
