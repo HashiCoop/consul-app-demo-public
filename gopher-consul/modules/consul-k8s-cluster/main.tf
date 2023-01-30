@@ -35,21 +35,21 @@ data "kubernetes_service" "consul_dns" {
   }
 }
 
-resource "kubernetes_config_map" "consul_dns" {
-  metadata {
-    name = "kube-dns"
-    namespace = "kube-system"
-    labels = {
-      "addonmanager.kubernetes.io/mode" = "EnsureExists"
-    }
-  }
+# resource "kubernetes_config_map" "consul_dns" {
+#   metadata {
+#     name = "kube-dns"
+#     namespace = "kube-system"
+#     labels = {
+#       "addonmanager.kubernetes.io/mode" = "EnsureExists"
+#     }
+#   }
 
-  data = {
-    stubDomains = {
-      consul = [ data.kubernetes_service.consul_dns.spec[0].clusterIP ]
-    }
-  }
-}
+#   data = {
+#     stubDomains = {
+#       consul = [ data.kubernetes_service.consul_dns.spec[0].clusterIP ]
+#     }
+#   }
+# }
 
 data "kubernetes_secret" "consul_bootstrap_acl_token" {
   metadata {
