@@ -17,7 +17,7 @@ resource "consul_service" "vault" {
     check_id                          = "service:${var.VAULT_NAME}-api"
     name                              = "${var.VAULT_NAME}-health"
     status                            = "passing"
-    http                              = "https://${var.VAULT_EXTERNAL_ADDRESS}:${var.VAULT_PORT}/v1/sys/health"
+    http                              = "${var.VAULT_EXTERNAL_ADDRESS}:${var.VAULT_PORT}/v1/sys/health"
     tls_skip_verify                   = true
     interval                          = "10s"
     timeout                           = "5s"
