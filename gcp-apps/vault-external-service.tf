@@ -35,7 +35,7 @@ resource "consul_config_entry" "terminating_gateway" {
 }
 
 resource "consul_config_entry" "service_defaults" {
-  name = "${var.VAULT_NAME}-serice-default"
+  name = var.VAULT_NAME
   kind = "service-defaults"
 
   config_json = jsonencode({
