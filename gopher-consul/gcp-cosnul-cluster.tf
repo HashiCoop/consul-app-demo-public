@@ -23,7 +23,3 @@ output "gcp_consul_auth" {
     token          = module.gcp_consul.consul_bootstrap_acl_token
   }
 }
-
-output "dns" {
-  value = module.gcp_consul.dns
-}
