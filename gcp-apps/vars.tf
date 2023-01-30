@@ -21,5 +21,5 @@ variable "VAULT_EXTERNAL_ADDRESS" {
 
 variable "VAULT_PORT" {
   type    = number
-  default = 80
+  default = 443
 }

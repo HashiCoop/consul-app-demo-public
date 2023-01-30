@@ -42,7 +42,7 @@ resource "consul_config_entry" "service_defaults" {
     Protocol = "http"
     Destination = {
       Addresses = [resource.consul_node.vault.address]
-      # Port      = var.VAULT_PORT
+      Port      = var.VAULT_PORT
     }
   })
 }
