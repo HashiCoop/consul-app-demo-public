@@ -22,7 +22,7 @@ provider "consul" {
 }
 
 output "gcp_consul_host" {
-  value = 
+  value = "https://${module.gcp_consul.consul_ui_endpoint.ip}"
 }
 
 resource "consul_config_entry" "aws_mesh_gateway" {
