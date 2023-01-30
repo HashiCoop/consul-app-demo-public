@@ -28,6 +28,29 @@ resource "helm_release" "consul" {
   values = var.CONSUL_VALUES
 }
 
+data "kubernetes_service" "consul_dns" {
+  metadata {
+    name = "consul-dns"
+    namespace = helm_release.consul.namespace
+  }
+}
+
+resource "kubernetes_config_map" "consul_dns" {
+  metadata {
+    name = "kube-dns"
+    namespace = "kube-system"
+    labels = {
+      "addonmanager.kubernetes.io/mode" = "EnsureExists"
+    }
+  }
+
+  data {
+    stubDomains = {
+      consul = [ data.kubernetes_service.consul_dns.spec[0].ClusterIp ]
+    }
+  }
+}
+
 data "kubernetes_secret" "consul_bootstrap_acl_token" {
   metadata {
     name = "consul-bootstrap-acl-token"
