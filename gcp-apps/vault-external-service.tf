@@ -30,7 +30,7 @@ resource "consul_config_entry" "terminating_gateway" {
   kind = "terminating-gateway"
 
   config_json = jsonencode({
-    Services = [{ Name = consul_service.vault.name}]
+    Services = [{ Name = var.VAULT_NAME}]
   })
 }
 
