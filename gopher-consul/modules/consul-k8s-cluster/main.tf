@@ -45,9 +45,7 @@ resource "kubernetes_config_map" "consul_dns" {
   }
 
   data = {
-    stubDomains = {
-      consul = [ data.kubernetes_service.consul_dns.spec[0].cluster_ip ]
-    }
+    stubDomains = "{\"consul\" : [${data.kubernetes_service.consul_dns.spec[0].cluster_ip}]}"
   }
 }
 
