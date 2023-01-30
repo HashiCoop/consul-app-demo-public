@@ -16,6 +16,10 @@ provider "consul" {
   insecure_https = true
 }
 
+output "gcp_consul_host" {
+  value = "https://${module.gcp_consul.consul_ui_endpoint.ip}"
+}
+
 resource "consul_config_entry" "aws_mesh_gateway" {
   provider = consul.aws
 
