@@ -25,3 +25,5 @@ syncCatalog:
   k8sDenyNamespaces: ['kube-node-lease']
 dns:
   enabled: true
+terminatingGateways:
+  enabled: true
