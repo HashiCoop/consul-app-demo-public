@@ -14,15 +14,14 @@ variable "GCP_CONSUL_TOKEN" {
 provider "consul" {
   alias   = "gcp"
 
-  address        = "https://34.68.143.78"
-  # token          = module.gcp_consul.consul_bootstrap_acl_token
-    token          = var.GCP_CONSUL_TOKEN
+  address        = "https://${module.gcp_consul.consul_ui_endpoint.ip}"
+  token          = module.gcp_consul.consul_bootstrap_acl_token
   scheme         = "https"
   insecure_https = true
 }
 
 output "gcp_consul_host" {
-  value = "https://${module.gcp_consul.consul_ui_endpoint.ip}"
+  value = 
 }
 
 resource "consul_config_entry" "aws_mesh_gateway" {
