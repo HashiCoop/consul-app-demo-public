@@ -10,13 +10,13 @@ variable "TFC_CONSUL_WORKSPACE" {
 
 variable "VAULT_NAME" {
   type    = string
-  default = "vault"
+  default = "static-server"
 }
 
 variable "VAULT_EXTERNAL_ADDRESS" {
   type    = string
 #   default = "vault-cluster-public-vault-fcbc1a73.d087f7bf.z1.hashicorp.cloud"
-    default = "google.com"
+    default = "10.116.15.99"
 }
 
 variable "VAULT_PORT" {
