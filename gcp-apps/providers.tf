@@ -4,8 +4,7 @@ data "tfe_outputs" "consul" {
 }
 
 provider "consul" {
-  # address        = data.tfe_outputs.consul.values.gcp_consul_auth.address
-  address = "https://34.68.143.78"
+  address        = data.tfe_outputs.consul.values.gcp_consul_auth.address
   token          = data.tfe_outputs.consul.values.gcp_consul_auth.token
   scheme         = "https"
   insecure_https = true

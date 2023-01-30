@@ -14,7 +14,7 @@ resource "consul_service" "vault" {
   }
 
   check {
-    check_id                          = "service:${var.VAULT_NAME}-api"
+    check_id                          = "service:${var.VAULT_NAME}"
     name                              = "${var.VAULT_NAME}-health"
     status                            = "passing"
     http                              = "${var.VAULT_EXTERNAL_ADDRESS}:${var.VAULT_PORT}/v1/sys/health"
@@ -35,7 +35,7 @@ resource "consul_config_entry" "terminating_gateway" {
 }
 
 resource "consul_config_entry" "service_defaults" {
-  name = var.VAULT_NAME
+  name = consul_service.vault.name
   kind = "service-defaults"
 
   config_json = jsonencode({
