@@ -4,9 +4,10 @@ resource "consul_node" "vault" {
 }
 
 resource "consul_service" "vault" {
-  name = var.VAULT_NAME
+  name = resource.consul_node.vault.name
   node = resource.consul_node.vault.name
   port = var.VAULT_PORT
+
   meta = {
     external-node  = "true"
     external-probe = "true"
@@ -32,7 +33,18 @@ resource "consul_config_entry" "terminating_gateway" {
   config_json = jsonencode({
     Services = [{ Name = consul_service.vault.name }]
   })
+}
 
+resource "consul_config_entry" "terminating_gateway" {
+  name = "${consul_service.vault.name}-proxy"
+  kind = "connect-proxy"
+
+  config_json = jsonencode({
+    port = 8200
+    proxy = {
+      destination_service_name = "vault"
+    }
+  })
 }
 
 resource "consul_config_entry" "service_defaults" {
