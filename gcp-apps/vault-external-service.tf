@@ -10,19 +10,19 @@ resource "consul_service" "vault" {
 
   meta = {
     external-node  = "true"
-    external-probe = "true"
+    external-probe = "false"
   }
 
-  check {
-    check_id                          = "service:${var.VAULT_NAME}"
-    name                              = "${var.VAULT_NAME}-health"
-    status                            = "passing"
-    http                              = "${var.VAULT_EXTERNAL_ADDRESS}:${var.VAULT_PORT}/v1/sys/health"
-    tls_skip_verify                   = true
-    interval                          = "10s"
-    timeout                           = "5s"
-    deregister_critical_service_after = "30s"
-  }
+  # check {
+  #   check_id                          = "service:${var.VAULT_NAME}"
+  #   name                              = "${var.VAULT_NAME}-health"
+  #   status                            = "passing"
+  #   http                              = "${var.VAULT_EXTERNAL_ADDRESS}:${var.VAULT_PORT}/v1/sys/health"
+  #   tls_skip_verify                   = true
+  #   interval                          = "10s"
+  #   timeout                           = "5s"
+  #   deregister_critical_service_after = "30s"
+  # }
 }
 
 resource "consul_config_entry" "terminating_gateway" {
