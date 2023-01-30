@@ -35,7 +35,7 @@ resource "consul_config_entry" "terminating_gateway" {
   })
 }
 
-resource "consul_config_entry" "terminating_gateway" {
+resource "consul_config_entry" "vault_proxy" {
   name = "${consul_service.vault.name}-proxy"
   kind = "connect-proxy"
 
