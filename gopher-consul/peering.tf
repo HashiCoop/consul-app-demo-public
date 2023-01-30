@@ -7,11 +7,16 @@ provider "consul" {
   insecure_https = true
 }
 
+variable "GCP_CONSUL_TOKEN" {
+  type = string
+}
+
 provider "consul" {
   alias   = "gcp"
 
   address        = "https://34.68.143.78"
-  token          = module.gcp_consul.consul_bootstrap_acl_token
+  # token          = module.gcp_consul.consul_bootstrap_acl_token
+    token          = var.GCP_CONSUL_TOKEN
   scheme         = "https"
   insecure_https = true
 }
