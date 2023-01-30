@@ -10,7 +10,7 @@ variable "TFC_CONSUL_WORKSPACE" {
 
 variable "VAULT_NAME" {
   type    = string
-  default = "static-server"
+  default = "vault"
 }
 
 variable "VAULT_EXTERNAL_ADDRESS" {
