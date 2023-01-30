@@ -28,13 +28,6 @@ resource "helm_release" "consul" {
   values = var.CONSUL_VALUES
 }
 
-data "kubernetes_service" "consul_dns" {
-  metadata {
-    name = "consul-dns"
-    namespace = helm_release.consul.namespace
-  }
-}
-
 data "kubernetes_secret" "consul_bootstrap_acl_token" {
   metadata {
     name = "consul-bootstrap-acl-token"

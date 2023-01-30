@@ -35,17 +35,17 @@ resource "consul_config_entry" "terminating_gateway" {
   })
 }
 
-resource "consul_config_entry" "vault_proxy" {
-  name = "${consul_service.vault.name}-proxy"
-  kind = "connect-proxy"
+# resource "consul_config_entry" "vault_proxy" {
+#   name = "${consul_service.vault.name}-proxy"
+#   kind = "connect-proxy"
 
-  config_json = jsonencode({
-    port = 8200
-    proxy = {
-      destination_service_name = "vault"
-    }
-  })
-}
+#   config_json = jsonencode({
+#     port = 8200
+#     proxy = {
+#       destination_service_name = "vault"
+#     }
+#   })
+# }
 
 resource "consul_config_entry" "service_defaults" {
   name = "${consul_service.vault.name}-serice-default"

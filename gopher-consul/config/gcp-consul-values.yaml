@@ -20,7 +20,7 @@ connectInject:
 syncCatalog:
   enabled: true
   toConsul: true
-  toK8S: false
+  toK8S: true
   k8sAllowNamespaces: ['kube-system', 'kube-public', 'default']
   k8sDenyNamespaces: ['kube-node-lease']
 dns:
