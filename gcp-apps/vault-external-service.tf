@@ -6,7 +6,7 @@ resource "consul_node" "vault" {
 resource "consul_service" "vault" {
   name = resource.consul_node.vault.name
   node = resource.consul_node.vault.name
-  # port = var.VAULT_PORT
+  port = var.VAULT_PORT
 
   meta = {
     external-node  = "true"

@@ -15,11 +15,10 @@ variable "VAULT_NAME" {
 
 variable "VAULT_EXTERNAL_ADDRESS" {
   type    = string
-#   default = "vault-cluster-public-vault-fcbc1a73.d087f7bf.z1.hashicorp.cloud"
-    default = "10.116.15.99"
+  default = "http://35.168.1.122:8200/v1/sys/health"
 }
 
 variable "VAULT_PORT" {
   type    = number
-  default = 80
+  default = 8200
 }
