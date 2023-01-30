@@ -26,11 +26,11 @@ resource "consul_service" "vault" {
 }
 
 resource "consul_config_entry" "terminating_gateway" {
-  name = "${var.VAULT_NAME}-terminating-gateway"
+  name = "terminating-gateway"
   kind = "terminating-gateway"
 
   config_json = jsonencode({
-    Services = [{ Name = var.VAULT_NAME}]
+    Services = [{ Name = consul_service.vault.name}]
   })
 }
 
