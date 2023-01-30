@@ -47,15 +47,3 @@ resource "consul_config_entry" "service_defaults" {
     }
   })
 }
-
-# resource "consul_config_entry" "exported_services" {
-#   name = "default" # required value
-#   kind = "exported-services"
-
-#   config_json = jsonencode({
-#     Services = [{
-#       Name      = consul_service.vault.name
-#       Consumers = [{ Peer = var.VAULT_UPSTREAM_DC }]
-#     }]
-#   })
-# }
