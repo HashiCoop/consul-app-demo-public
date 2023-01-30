@@ -20,10 +20,6 @@ provider "consul" {
   insecure_https = true
 }
 
-output "gcp_consul_host" {
-  value = 
-}
-
 resource "consul_config_entry" "aws_mesh_gateway" {
   provider = consul.aws
 
