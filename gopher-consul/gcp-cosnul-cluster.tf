@@ -19,7 +19,7 @@ module "gcp_consul" {
 
 output "gcp_consul_auth" {
   value = {
-    address        = module.gcp_consul.consul_ui_endpoint.hostname
+    address        = "https://${module.gcp_consul.consul_ui_endpoint.ip}"
     token          = module.gcp_consul.consul_bootstrap_acl_token
   }
 }
