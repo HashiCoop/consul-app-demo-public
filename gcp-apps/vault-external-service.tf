@@ -26,11 +26,11 @@ resource "consul_node" "vault" {
 # }
 
 resource "consul_config_entry" "terminating_gateway" {
-  name = "${consul_service.vault.name}-terminating-gateway"
+  name = "${var.VAULT_NAME}-terminating-gateway"
   kind = "terminating-gateway"
 
   config_json = jsonencode({
-    Services = [{ Name = consul_service.vault.name }]
+    Services = [{ Name = var.VAULT_NAME}]
   })
 }
 
@@ -47,14 +47,14 @@ resource "consul_config_entry" "terminating_gateway" {
 # }
 
 resource "consul_config_entry" "service_defaults" {
-  name = "${consul_service.vault.name}-serice-default"
+  name = "${var.VAULT_NAME}-serice-default"
   kind = "service-defaults"
 
   config_json = jsonencode({
     Protocol = "http"
     Destination = {
       Addresses = [resource.consul_node.vault.address]
-      Port      = consul_service.vault.port
+      Port      = var.VAULT_PORT
     }
   })
 }
