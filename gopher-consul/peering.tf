@@ -7,14 +7,14 @@ provider "consul" {
   insecure_https = true
 }
 
-provider "consul" {
-  alias   = "gcp"
+# provider "consul" {
+#   alias   = "gcp"
 
-  address        = "https://${module.gcp_consul.consul_ui_endpoint.ip}"
-  token          = module.gcp_consul.consul_bootstrap_acl_token
-  scheme         = "https"
-  insecure_https = true
-}
+#   address        = "https://${module.gcp_consul.consul_ui_endpoint.ip}"
+#   token          = module.gcp_consul.consul_bootstrap_acl_token
+#   scheme         = "https"
+#   insecure_https = true
+# }
 
 # resource "consul_config_entry" "aws_mesh_gateway" {
 #   provider = consul.aws
