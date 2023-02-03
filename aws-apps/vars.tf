@@ -15,7 +15,6 @@ variable "VAULT_NAME" {
 
 variable "VAULT_EXTERNAL_ADDRESS" {
   type    = string
-  default = "https://vault-cluster-public-vault-fcbc1a73.d087f7bf.z1.hashicorp.cloud"
 }
 
 variable "VAULT_PORT" {
