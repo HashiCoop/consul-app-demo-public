@@ -1,7 +1,7 @@
 provider "consul" {
   alias = "aws"
 
-  address        = module.aws_consul.consul_ui_endpoint.hostname
+  address        = "https://aee8cc9275cd74926b9bd1e5751cede7-1058543315.us-east-1.elb.amazonaws.com"
   token          = module.aws_consul.consul_bootstrap_acl_token
   scheme         = "https"
   insecure_https = true
