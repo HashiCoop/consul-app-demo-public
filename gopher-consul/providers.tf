@@ -24,5 +24,5 @@ provider "aws" {
 }
 
 provider "google" {
-  project     = "hc-0a4bbbd93e1449aea8902b850d9"
+  project     = var.GOOGLE_PROJECT
 }

@@ -9,3 +9,5 @@ variable "TFC_CLUSTER_WORKSPACE" {
 }
 
 variable "TFC_WORKSPACE_NAME" {}
+
+variable "GOOGLE_PROJECT" {}
