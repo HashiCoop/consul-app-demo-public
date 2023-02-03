@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: curl
+  namespace: consul
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: curl
+  namespace: consul
+spec:
+  selector:
+    app: curl
+  ports:
+    - port: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: curl
+  namespace: consul
+  labels:
+    app: curl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: curl
+  template:
+    metadata:
+      annotations:
+        consul.hashicorp.com/connect-inject: 'true'
+        # consul.hashicorp.com/connect-service-upstreams: |
+        #   'static-server:8080'
+        #   'vault.virtual.consul:8200'
+        # consul.hashicorp.com/transparent-proxy: 'true'
+      labels:
+        app: curl
+    spec:
+      serviceAccountName: curl
+      containers:
+      - name: curl
+        image: anubhavmishra/tiny-tools
+        # image: curlimages/curl
+        command:
+          - sleep
+          - "3600"

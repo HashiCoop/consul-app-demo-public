@@ -1,0 +1,26 @@
+resource "consul_node" "vault" {
+  name    = var.VAULT_NAME
+  address = var.VAULT_EXTERNAL_ADDRESS
+}
+
+resource "consul_service" "vault" {
+  name = resource.consul_node.vault.name
+  node = resource.consul_node.vault.name
+apiVersion: consul.hashicorp.com/v1alpha1
+kind: TerminatingGateway
+metadata:
+  name: terminating-gateway
+spec:
+  services:
+    - name: vault
+---
+apiVersion: consul.hashicorp.com/v1alpha1
+kind: ServiceDefaults
+metadata:
+  name: vault
+spec:
+  protocol: http
+  destination:
+    addresses:
+      - "<vault-addr>"
+    port: 8200

@@ -1,0 +1,1 @@
+curl -H "X-Consul-Token: ${CONSUL_HTTP_TOKEN}" --request PUT --data @vault-service.json <CONSUL_HTTP_ADDR>:8500/v1/catalog/register

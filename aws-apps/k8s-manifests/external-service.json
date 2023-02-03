@@ -1,0 +1,35 @@
+{
+    "Datacenter": "<datacenter_name>",
+    "Node": "<vault>",
+    "Address": "<vault_address>",
+    "TaggedAddresses": {
+      "lan": "<vault_address>",
+      "wan": "<vault_address>"
+    },
+    "NodeMeta": {
+      "external-node": "true",
+      "external-probe": "false"
+    },
+    "Service": {
+      "ID": "vault",
+      "Service": "vault",
+      "Tags": [
+        "v1"
+      ],
+      "Address": "<vault_address>",
+      "Port": 8200
+    },
+    "Checks": [{
+      "Node": "vault_test",
+      "CheckID": "service:vault_api",
+      "Name": "",
+      "Notes": "",
+      "Status": "passing",
+      "ServiceID": "vault",
+      "Definition": {
+        "HTTP": "https://<vault_address>:8200/v1/sys/health",
+        "Interval": "10s",
+        "Timeout": "5s"
+      }
+    }]
+  }
